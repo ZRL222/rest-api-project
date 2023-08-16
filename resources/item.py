@@ -3,7 +3,7 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
-from db import items
+from db import items, stores
 from schemas import ItemSchema, ItemUpdateSchema
 
 blp = Blueprint("Items", __name__, description="Operations on items")
@@ -54,7 +54,7 @@ class ItemList(MethodView):
             ):
                 abort(400, message=f"Item already exists.")
 
-        if item_data["store_id"] not in items:
+        if item_data["store_id"] not in stores:
             abort(404, message="Store not found.")
     
         item_id = uuid.uuid4().hex
