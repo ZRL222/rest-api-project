@@ -79,8 +79,8 @@ class Tag(MethodView):
         description="Deletes a taf if no item is tagged with it.",
         example={"message": "Tag deleted."}
     )
-    @blp.response(404, description="Tag not found.")
-    @blp.response(
+    @blp.alt_response(404, description="Tag not found.")
+    @blp.alt_response(
         400,
         description="Returned if the tag is assigned to one or more items. In this vase the tag is not deleted."
     )
